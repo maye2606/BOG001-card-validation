@@ -1,5 +1,6 @@
 
 
+
 const tarjeta = document.querySelector('#tarjeta'),
 	  btnAbrirFormulario = document.querySelector('#btn-abrir-formulario'),
 	  formulario = document.querySelector('#formulario-tarjeta'),
@@ -123,5 +124,6 @@ formulario.inputCCV.addEventListener('keyup', () => {
 	// Eliminar las letras
 	.replace(/\D/g, '');
 
-	ccv.textContent = formulario.inputCCV.value;
+	ccv.textContent = formulario.inputCCV.value;  
+
 });
