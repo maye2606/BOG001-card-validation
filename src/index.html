@@ -6,11 +6,41 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Banco MAVI</title>
 	<link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+	<script src = " https://use.fontawesome.com/d67be6ec35.js " > </script>		
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<header>
+		<div class="wrapper">
+		<div class="logo" id="logo"></div>
+		<img src="img/logo2.jpeg" class="inicio" alt="">
+		
+	<nav>
+		<a href="#">Inicio</a>
+		<a href="#">Servicios</a>
+		<a href="#">Contáctenos</a>
+		<a href="#">Preguntas frecuentes</a>
+	</nav>
+	</header>
+	<main>
+	<!-- Primera vista-->
+	<section id="primeraVista" class="primera-pagina">
+		
+        <div class="option-container">
+			<br><br><br><br><br><br><br><br><br><br><br>
+			<div class="usario-container">
+				<label for="usario">Ingrese Usuario</label> 
+				<input type="text" id="usario" required="required" autocomplete="off">
+				<label for="password">Ingrese Password</label> 
+				<input type="text" id="password" required="required" maxlength="4" autocomplete="off"><br>
+        		<input type="button" class="buttonSelect" value="Ingresar" id="ingresarButton" />
+          	</div>
+		</div>
+        
+    </section>
+	<section class="contenedor hidden" id="vistaTarjeta">
 	<div class="contenedor">
-
+		
 		<!-- Tarjeta -->
 		<section class="tarjeta" id="tarjeta">
 			<div class="delantera">
@@ -67,11 +97,11 @@
 		<form action="" id="formulario-tarjeta" class="formulario-tarjeta">
 			<div class="grupo">
 				<label for="inputNumero">Número Tarjeta</label>
-				<input type="text" id="inputNumero" maxlength="19" autocomplete="off">
+				<input type="text" id="inputNumero" required="required" maxlength="19" autocomplete="off">
 			</div>
 			<div class="grupo">
 				<label for="inputNombre">Nombre</label>
-				<input type="text" id="inputNombre" maxlength="19" autocomplete="off">
+				<input type="text" id="inputNombre" required="required" maxlength="19" autocomplete="off">
 			</div>
 			<div class="flexbox">
 				<div class="grupo expira">
@@ -91,18 +121,40 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="grupo ccv">
 					<label for="inputCCV">CCV</label>
 					<input type="text" id="inputCCV" maxlength="3">
-				</div>
-			</div>
-	          
-			<button onclick="validarTarjeta()">Enviar</button>
+        </div>
+        </div>
+			<input id="btn-Enviar" value="Enviar" class="button" required="required" type="submit"/>
+			
 		</form>
+		<h1 id="tarjetaInvalida"></h1>
+              
+      <section id="tarjetaValida">
+        <div class="valid-container">
+        <h1 id="tarjetaValidaMensaje"></h1>
+        </div>
+      </section>
 	</div>
+	</section>
+</main>
+	<div class="container-footer">
+		<footer>
+				<div class="logo-footer">
+					<img src="img/logo2.jpeg" alt="">
+				</div>
 
-	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
-	<script src="index.js" type = "module"> </script>
+				<div class="redes-footer">
+					<a href="#"><i class="fab fa-facebook icon-red-footer"></i></a>
+					<a href="#"><i class="fab fa-instagram icon-red-footer"></i></a>
+					<a href="#"><i class="fab fa-twitter icon-red-footer"></i></a>
+				</div>
+			<hr>
+			<h4>Todos los derechos reservados de Bank Mavi</h4>
+		</footer>
+	</div>
+<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+	<script src="index.js" type="module"></script>
 </body>
 </html>

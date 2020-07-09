@@ -1,6 +1,8 @@
 
 
 
+import validator from './validator.js';
+
 const tarjeta = document.querySelector('#tarjeta'),
 	  btnAbrirFormulario = document.querySelector('#btn-abrir-formulario'),
 	  formulario = document.querySelector('#formulario-tarjeta'),
@@ -10,8 +12,33 @@ const tarjeta = document.querySelector('#tarjeta'),
 	  firma = document.querySelector('#tarjeta .firma p'),
 	  mesExpiracion = document.querySelector('#tarjeta .mes'),
 	  yearExpiracion = document.querySelector('#tarjeta .year'),
-	  ccv = document.querySelector('#tarjeta .ccv');
+	  ccv = document.querySelector('#tarjeta .ccv'),
+	  UsuarioTarjeta = document.getElementById("inputNumero"),
+	  tarjetaInvalida = document.getElementById("tarjetaInvalida"),
+	  tarjetaValida = document.getElementById("tarjetaValida"),
+	  mensajeTarjetaValida = document.getElementById("tarjetaValidaMensaje"),
+	  primeraVista =document.getElementById("primeraVista"),
+	  ingresar= document.getElementById("ingresarButton"),
+	  vistaTarjeta = document.getElementById("vistaTarjeta");
 
+	  formulario.addEventListener ("submit", ValidarTarjeta);
+	  formulario.addEventListener ("submit", consultaAprobada);
+	  formulario.style.display  = "none";
+	  ingresar.addEventListener("click", segundaVista);
+	  vistaTarjeta.style.display = "none";
+
+	  // * vista principal de bankmavi.
+
+	function segundaVista(){
+		vistaTarjeta.style.display = "block";
+		primeraVista.style.display = "none";
+		let usuario = getElementById("nombreUsuario");
+		nombreUsario.value = "";
+		let password = getElementById("passwordUsuario");
+		passwordUsuario.value = "";
+	  }
+
+	
 // * Volteamos la tarjeta para mostrar el frente.
 const mostrarFrente = () => {
 	if(tarjeta.classList.contains('active')){
@@ -28,7 +55,8 @@ tarjeta.addEventListener('click', () => {
 btnAbrirFormulario.addEventListener('click', () => {
 	btnAbrirFormulario.classList.toggle('active');
 	formulario.classList.toggle('active');
-});
+	formulario.style.display  = "block";
+	});
 
 // * Select del mes generado dinamicamente.
 for(let i = 1; i <= 12; i++){
@@ -53,7 +81,7 @@ formulario.inputNumero.addEventListener('keyup', (e) => {
 
 	formulario.inputNumero.value = valorInput
 	// Eliminamos espacios en blanco
-	.replace(/\s/g, '')
+	.replace (/\s/g, '')
 	// Eliminar las letras
 	.replace(/\D/g, '')
 	// Ponemos espacio cada cuatro numeros
@@ -69,7 +97,7 @@ formulario.inputNumero.addEventListener('keyup', (e) => {
 		logoMarca.innerHTML = '';
 	}
 
-	if(valorInput[0] == 4){
+	else if(valorInput[0] == 4){
 		logoMarca.innerHTML = '';
 		const imagen = document.createElement('img');
 		imagen.src = 'img/logos/visa.png';
@@ -80,10 +108,33 @@ formulario.inputNumero.addEventListener('keyup', (e) => {
 		imagen.src = 'img/logos/mastercard.png';
 		logoMarca.appendChild(imagen);
 	}
-
-	// Volteamos la tarjeta para que el usuario vea el frente.
+	
+    // Volteamos la tarjeta para que el usuario vea el frente.
 	mostrarFrente();
 });
+
+
+function consultaAprobada() {
+	console.log("oki");
+	const numeroTc = UsuarioTarjeta.value;
+	const maskify = validator.maskify(numeroTc);
+	document.getElementById("tarjetaValida").style.display = "block";
+	document.getElementById("formulario-tarjeta").style.display = "none";
+	mensajeTarjetaValida.innerHTML = `La Consulta con la tarjeta </br> ${maskify} </br> se ha realizado`;
+	tarjetaInvalida.innerHTML = "";
+  }
+
+function ValidarTarjeta (event){
+	console.log("se esta ejecutando");
+	event.preventDefault();
+	const numeroTc = UsuarioTarjeta.value;
+  if (validator.isValid(numeroTc) === true) {
+	  consultaAprobada();		
+  } else {
+	  tarjetaInvalida.innerHTML = "Tarjeta no valida";
+  }
+  validator.maskify(numeroTc);
+}
 
 // * Input nombre de tarjeta
 formulario.inputNombre.addEventListener('keyup', (e) => {
@@ -124,6 +175,5 @@ formulario.inputCCV.addEventListener('keyup', () => {
 	// Eliminar las letras
 	.replace(/\D/g, '');
 
-	ccv.textContent = formulario.inputCCV.value;  
-
+	ccv.textContent = formulario.inputCCV.value;
 });
